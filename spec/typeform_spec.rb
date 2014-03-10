@@ -6,9 +6,12 @@ describe TypeForm do
   let(:form_id) { '1234' }
   let(:api_key) { 'some api key' }
 
+  let(:results) { ["some", "results"]}
+
   let!(:data_receiver) do
     data_receiver = double(DataReceiver)
-    allow(DataReceiver).to receive(:new).and_return(data_receiver)
+    allow(data_receiver).to receive(:get).and_return results
+    allow(DataReceiver).to receive(:new).and_return data_receiver
     data_receiver
   end
 
@@ -24,6 +27,11 @@ describe TypeForm do
       expect(DataReceiver).to have_received(:new).with hash_including(ssl: false)
     end
 
+    it 'returns the results from the DataReceiver' do
+      typeform_results = TypeForm.new.get form_id, api_key
+      expect(typeform_results).to eq(results)
+    end
+
   end
 
   context 'with SSL config' do
@@ -32,9 +40,6 @@ describe TypeForm do
       TypeForm.new.get form_id, api_key, ssl_location
       expect(DataReceiver).to have_received(:new).with hash_including(ssl: ssl_location)
     end
-  end
-
-  xit 'returns the results from the DataReceiver' do
   end
 
 end

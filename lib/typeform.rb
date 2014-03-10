@@ -10,7 +10,8 @@ class TypeForm
       api_key: api_key,
       ssl: ssl_location
     }
-    DataReceiver.new config
+    data_receiver = DataReceiver.new config
+    data_receiver.get
   end    
 
 end
