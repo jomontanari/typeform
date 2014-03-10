@@ -13,3 +13,4 @@ SSL certificate location defaults to false (none)
 To Do: 
 - Does not currently deal with what happens if the response fails
 - Fails if SSL certificate location is set, not yet implemented
+- Ignores all data in the typeform response except for the actual answers (meta data, response ID, etc)
