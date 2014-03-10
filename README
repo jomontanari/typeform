@@ -1,3 +1,6 @@
-Connect to the TypeForm for a specified form ID with a valid API key. 
+Very simple gem to connect to the TypeForm API for a specified form ID with a valid API key. 
 
 Specify the structure for the hash (model) to be returned. 
+
+To Do: 
+- Does not currently deal with what happens if the response fails
