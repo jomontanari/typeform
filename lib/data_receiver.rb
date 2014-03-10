@@ -14,7 +14,8 @@ class DataReceiver
 
   def get_since since
     conn = Faraday.new faraday_config
-    conn.get url_params(since)
+    response = conn.get url_params(since)
+    response.body
   end
 
   private 
