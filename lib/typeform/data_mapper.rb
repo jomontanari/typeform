@@ -20,8 +20,12 @@ module TypeForm
 
     def map_answers answers, template
       template.map do |key, value|
-        field_id = @question_mapper.find value
-        [ key, answers[field_id] ]
+        if value.is_a? Hash
+          [ key, map_answers(answers, value) ]
+        else 
+          field_id = @question_mapper.find value
+          [ key, answers[field_id] ]
+        end
       end.to_h
     end
   end
