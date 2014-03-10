@@ -6,12 +6,12 @@ Gem::Specification.new do |s|
   s.description = "Adapter to connect to Typeform API"
   s.authors     = ["Jo Cranford"]
   s.email       = 'jo.cranford@gmail.com'
-  s.files       = ["lib/**/*.rb"]
+  s.files       = Dir['lib/**/*.rb']
   s.homepage    =
     'http://github.com/jocranford/typeform'
   
   s.add_dependency 'faraday', '~> 0.9.0'
-  
+
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
 end
