@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'typeform'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.date        = '2014-03-10'
   s.summary     = "Adapter to connect to Typeform API"
   s.description = "Adapter to connect to Typeform API"
