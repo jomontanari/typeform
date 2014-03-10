@@ -9,8 +9,12 @@ class DataReceiver
   end
 
   def get
+    get_since nil
+  end
+
+  def get_since since
     conn = Faraday.new faraday_config
-    conn.get url_params
+    conn.get url_params(since)
   end
 
   private 
@@ -32,8 +36,9 @@ class DataReceiver
     end
   end
 
-  def url_params
-    "/v0/form/#{@config[:form_id]}?key=#{@config[:api_key]}&completed=true"
+  def url_params since
+    last_run_param = "&since=#{since.to_i}" unless since.nil?
+    "/v0/form/#{@config[:form_id]}?key=#{@config[:api_key]}&completed=true#{last_run_param}"
   end
 
   def type_form_url
