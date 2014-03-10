@@ -43,29 +43,70 @@ module TypeForm
 
     end
 
-    context 'with a single single_response' do
-
-      let(:responses) do
-        [{
-          answers: {
-            "textfield_1" => "Joanne"
-          }
-        }]
-      end
+    context 'with text fields only' do
 
       let(:mapped_results) do
         allow(question_mapper).to receive(:find).and_return "textfield_1"
         DataMapper.new(typeform_response, object_template).map
       end
 
+      context 'single response with single field' do
 
-      it 'returns a single result' do
-        expect(mapped_results.size).to be 1
+        let(:responses) do
+          [{
+            answers: {
+              "textfield_1" => "Joanne"
+            }
+          }]
+        end
+
+        it 'returns a single result' do
+          expect(mapped_results.size).to be 1
+        end
+
+        it 'maps text fields to simple properties' do
+          expect(mapped_results.first[:name]).to eq "Joanne"
+        end
+
       end
 
-      it 'maps text fields to simple properties' do
-        expect(mapped_results.first[:name]).to eq "Joanne"
+      context 'multiple responses' do
+        let(:responses) do
+          [{
+            answers: {
+              "textfield_1" => "Joanne"
+            }
+          },
+          {
+            answers: {
+              "textfield_1" => "John"
+            }
+          }
+        ]
+        end
+
+        it 'returns the correct number of results' do
+          expect(mapped_results.size).to be 2
+        end
+
+        it 'maps text fields correctly for each result' do
+          expect(mapped_results.first[:name]).to eq "Joanne"
+          expect(mapped_results[1][:name]).to eq "John"
+        end
       end
+
+      context 'multiple fields'
+
+      context 'nested properties'
+
+    end
+
+
+    context 'with list selection fields' do
+
+      context 'simple properties'
+
+      context 'nested properties'
 
     end
 
