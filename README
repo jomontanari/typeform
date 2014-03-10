@@ -1,0 +1,3 @@
+Connect to the TypeForm for a specified form ID with a valid API key. 
+
+Specify the structure for the hash (model) to be returned. 
