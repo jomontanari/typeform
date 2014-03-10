@@ -8,11 +8,7 @@ class DataReceiver
     @config = config
   end
 
-  def get
-    get_since nil
-  end
-
-  def get_since since
+  def get since
     conn = Faraday.new faraday_config
     response = conn.get url_params(since)
     response.body

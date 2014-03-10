@@ -31,38 +31,38 @@ describe DataReceiver do
     context 'no time since specified' do
 
       it 'sends the typeform URL to faraday' do
-        data_receiver.get 
+        data_receiver.get nil
         expect(Faraday).to have_received(:new).with hash_including(url: 'https://api.typeform.com')
       end
 
       it 'sets Faraday to not verify SSL certs' do
-        data_receiver.get 
+        data_receiver.get nil
         expect(Faraday).to have_received(:new).with hash_including(ssl: { verify: false })
       end
 
       it 'sends a request to the correct URL with form ID and API key' do
-        data_receiver.get 
+        data_receiver.get nil
         expect(faraday_double).to have_received(:get).with "/v0/form/#{config[:form_id]}?key=#{config[:api_key]}&completed=true"
       end
 
       it 'returns the response body' do
-        result_string = data_receiver.get
+        result_string = data_receiver.get nil
         expect(result_string).to eq response_body
       end
 
     end
 
     context 'time since specified' do
-      
+
       it 'sends a request to the correct URL with form ID, API key and since parameter' do
         time = Time.now
         time_value = time.to_i
-        data_receiver.get_since time
+        data_receiver.get time
         expect(faraday_double).to have_received(:get).with "/v0/form/#{config[:form_id]}?key=#{config[:api_key]}&completed=true&since=#{time_value}"
       end
 
       it 'returns the response body' do
-        result_string = data_receiver.get_since Time.now
+        result_string = data_receiver.get Time.now
         expect(result_string).to eq response_body
       end
 
@@ -80,7 +80,7 @@ describe DataReceiver do
     end
 
     it 'raises an exception as it is not implemented' do
-      expect { data_receiver.get }.to raise_error(NotImplementedError)
+      expect { data_receiver.get(nil) }.to raise_error(NotImplementedError)
     end
 
   end
