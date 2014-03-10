@@ -17,7 +17,7 @@ module TypeForm
     private
 
     def normalize text
-      text.upcase.strip
+      text.upcase.strip.gsub("?", "")
     end
 
   end

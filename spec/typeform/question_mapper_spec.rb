@@ -24,9 +24,11 @@ module TypeForm
     end
 
     it 'ignores leading and trailing spaces' do
+      expect(question_mapper.find "   what is your name?   ").to eq "textfield1"
     end
 
     it 'ignores trailing question marks' do
+      expect(question_mapper.find "what is your company").to eq "textfield2"
     end
     
   end
