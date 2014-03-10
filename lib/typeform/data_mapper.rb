@@ -5,8 +5,8 @@ module TypeForm
   # maps a single response on to the object template
   class DataMapper
 
-    def initialize question_mapper
-      @question_mapper = question_mapper
+    def initialize typeform_response
+      @question_mapper = QuestionMapper.new typeform_response["questions"]
     end
 
     def map typeform_response, object_template
