@@ -27,7 +27,10 @@ describe TypeForm do
   end
 
   context 'with SSL config' do
-    xit 'passes SSL to the data receiver config if it is passed in' do
+    let(:ssl_location) { 'somewhere' }
+    it 'passes SSL to the data receiver config if it is passed in' do
+      TypeForm.new.get form_id, api_key, ssl_location
+      expect(DataReceiver).to have_received(:new).with hash_including(ssl: ssl_location)
     end
   end
 
