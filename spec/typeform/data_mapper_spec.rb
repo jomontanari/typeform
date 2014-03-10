@@ -18,44 +18,53 @@ module TypeForm
         "question" => 'what is your name?'
       ]
     end
+    let(:responses) do
+      []
+    end
 
     let(:typeform_response) do
       {
         "questions" => questions,
-        "responses" => []
+        "responses" => responses
+      }
+    end
+    let(:object_template) do
+      {
+        name: "what is your name?"
       }
     end
 
     describe '#initialize' do
       
       it 'creates a question mapper from the typeform response' do
-        DataMapper.new typeform_response
+        DataMapper.new typeform_response, object_template
         expect(QuestionMapper).to have_received(:new).with questions
       end    
 
     end
 
+    context 'with a single single_response' do
 
-    describe 'mapping a single set of answers' do
-
-      let(:single_response) do
-        {
+      let(:responses) do
+        [{
           answers: {
             "textfield_1" => "Joanne"
           }
-        }
+        }]
       end
 
-      let(:object_template) do
-        {
-          name: "what is your name?"
-        }
+      let(:mapped_results) do
+        allow(question_mapper).to receive(:find).and_return "textfield_1"
+        DataMapper.new(typeform_response, object_template).map
+      end
+
+
+      it 'returns a single result' do
+        expect(mapped_results.size).to be 1
       end
 
       it 'maps text fields to simple properties' do
-        allow(question_mapper).to receive(:find).and_return "textfield_1"
-        mapped_object = DataMapper.new(typeform_response).map single_response, object_template
-        expect(mapped_object[:name]).to eq "Joanne"
+        expect(mapped_results.first[:name]).to eq "Joanne"
       end
 
     end
