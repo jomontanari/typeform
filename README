@@ -2,5 +2,14 @@ Very simple gem to connect to the TypeForm API for a specified form ID with a va
 
 Specify the structure for the hash (model) to be returned. 
 
+Usage: 
+
+Typeform.retrieve_results form_id, api_key, since, ssl_certificate_location
+
+Set since to nil to retrieve all results. 
+
+SSL certificate location defaults to false (none)
+
 To Do: 
 - Does not currently deal with what happens if the response fails
+- Fails if SSL certificate location is set, not yet implemented
