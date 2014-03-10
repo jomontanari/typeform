@@ -19,7 +19,9 @@ describe TypeForm do
       expect(DataReceiver).to have_received(:new).with hash_including(form_id: form_id, api_key: api_key)
     end
 
-    xit 'sets SSL to false if it is not passed in' do
+    it 'sets SSL to false if it is not passed in' do
+      TypeForm.new.get form_id, api_key
+      expect(DataReceiver).to have_received(:new).with hash_including(ssl: false)
     end
 
   end
