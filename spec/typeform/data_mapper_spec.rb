@@ -95,7 +95,34 @@ module TypeForm
         end
       end
 
-      context 'multiple fields'
+      context 'multiple fields' do
+        let(:mapped_results) do
+          allow(question_mapper).to receive(:find).with("what is your name?").and_return "textfield_1"
+          allow(question_mapper).to receive(:find).with("what is your company?").and_return "textfield_2"
+          DataMapper.new(typeform_response, object_template).map
+        end
+        let(:responses) do
+          [{
+            answers: {
+              "textfield_1" => "Joanne",
+              "textfield_2" => "Somewhere"
+            }
+          }
+        ]
+        end
+        let(:object_template) do
+          {
+            name: "what is your name?",
+            company: "what is your company?",
+          }
+        end
+
+        it 'maps multiple text fields' do
+          expect(mapped_results.first[:name]).to eq "Joanne"
+          expect(mapped_results.first[:company]).to eq "Somewhere"
+        end
+
+      end
 
       context 'nested properties'
 
