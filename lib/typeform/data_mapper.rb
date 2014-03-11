@@ -23,10 +23,20 @@ module TypeForm
         if value.is_a? Hash
           [ key, map_answers(answers, value) ]
         else 
-          field = @question_mapper.find value
-          [ key, answers[field] ]
+          [key, map_field(value, answers) ]
         end
       end.to_h
+    end
+
+    def map_field value, answers
+      question, choice = value.split("_")
+      field = @question_mapper.find question
+
+      if choice.nil?
+        answers[field]
+      else
+        answers[field].include? choice
+      end
     end
   end
 
