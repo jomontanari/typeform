@@ -6,17 +6,21 @@ module TypeForm
 
     def initialize typeform_questions
       @questions = typeform_questions.map do |question_properties|
-        [ normalize(question_properties[:question]), question_properties[:id]]
+        [ clean_question(question_properties[:question]), clean_id(question_properties[:id])]
       end.to_h
     end
 
     def find question_text
-      @questions[normalize(question_text)]
+      @questions[clean_question(question_text)]
     end
 
     private
 
-    def normalize text
+    def clean_id id
+      id.split("_").take(2).join("_")
+    end
+
+    def clean_question text
       text.upcase.strip.gsub("?", "")
     end
 
