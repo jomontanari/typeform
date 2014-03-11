@@ -34,7 +34,15 @@ module TypeForm
       end
 
       def list key
-        "#{@answers[key + "_choice"]}#{@answers[key + "_other"]}"
+        if @answers.has_key? "#{key}_choice"
+          "#{@answers[key + "_choice"]}#{@answers[key + "_other"]}"  
+        else
+          get_all_choices key
+        end        
+      end
+
+      def get_all_choices key
+        @answers.select {|field_id, value| field_id.include? key}.values.reject(&:empty?)
       end
 
       def type key

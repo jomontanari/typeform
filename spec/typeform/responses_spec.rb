@@ -62,9 +62,36 @@ module TypeForm
       end
 
       context 'with multiple answers' do
+        let(:typeform_answers) do
+          [{
+            "answers" => {
+              "list_1_choice_1" => "Sunshine",
+              "list_1_choice_2" => "Rain",
+              "list_1_choice_3" => "",
+            }
+          }]
+        end
+
+        it 'retrieves the chosen responses in an array' do
+          expect(answer["list_1"]).to eq ["Sunshine", "Rain"]
+        end
       end
 
       context 'with multiple answers or other option' do
+        let(:typeform_answers) do
+          [{
+            "answers" => {
+              "list_1_choice_1" => "",
+              "list_1_choice_2" => "Rain",
+              "list_1_choice_3" => "",
+              "list_1_other" => "Cloudy"
+            }
+          }]
+        end
+
+        it 'retrieves the chosen responses including the other choice' do
+          expect(answer["list_1"]).to eq ["Rain", "Cloudy"]
+        end
       end
 
     end
