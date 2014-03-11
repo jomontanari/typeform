@@ -6,13 +6,13 @@ module TypeForm
 
     def initialize typeform_response, object_template
       @question_mapper = QuestionMapper.new typeform_response["questions"]
-      @responses = typeform_response["responses"]
+      @responses = Responses.new typeform_response["responses"]
       @object_template = object_template
     end
 
     def map 
       @responses.map do |response|
-        map_answers response[:answers], @object_template
+        map_answers response, @object_template
       end
     end
 
@@ -23,8 +23,8 @@ module TypeForm
         if value.is_a? Hash
           [ key, map_answers(answers, value) ]
         else 
-          field_id = @question_mapper.find value
-          [ key, answers[field_id] ]
+          field = @question_mapper.find value
+          [ key, answers[field] ]
         end
       end.to_h
     end
