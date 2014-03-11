@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'faraday'
+require 'multi_json'
 
 module TypeForm
 
@@ -13,7 +14,7 @@ module TypeForm
     def get since
       conn = Faraday.new faraday_config
       response = conn.get url_params(since)
-      response.body
+      yield MultiJson.load(response.body)
     end
 
     private 
