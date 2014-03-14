@@ -1,5 +1,8 @@
 # encoding: UTF-8
 
+require 'typeform/question_mapper'
+require 'typeform/responses'
+
 module TypeForm
   
   class DataMapper

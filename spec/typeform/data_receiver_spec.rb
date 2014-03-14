@@ -17,7 +17,7 @@ module TypeForm
           api_key: '5678'
         }
       end
-      let(:response_json) do   end
+      let(:response_json) do { "text" => "some text" }  end
       let(:response_body) { MultiJson.dump(response_json) }
       let(:response_double) do
         response_double = double("response")
