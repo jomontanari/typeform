@@ -10,8 +10,8 @@ module TypeForm
 
       let(:typeform_questions) do
         [
-          { id: 'textfield1', question: 'what is your name?' },
-          { id: 'textfield2', question: 'what is your company?' }
+          { "id" => 'textfield1', "question" => 'what is your name?' },
+          { "id" => 'textfield2', "question" => 'what is your company?' }
         ]
       end
 
@@ -39,9 +39,9 @@ module TypeForm
 
       let(:typeform_questions) do
         [
-          { id: 'list_1_choice_1', question: 'what weather do you like?' },
-          { id: 'list_1_choice_2', question: 'what weather do you like?' },
-          { id: 'list_1_other', question: 'what weather do you like?' }
+          { "id" => 'list_1_choice_1', "question" => 'what weather do you like?' },
+          { "id" => 'list_1_choice_2', "question" => 'what weather do you like?' },
+          { "id" => 'list_1_other', "question" => 'what weather do you like?' }
         ]
       end
 

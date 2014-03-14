@@ -6,7 +6,7 @@ module TypeForm
 
     def initialize typeform_questions
       @questions = typeform_questions.map do |question_properties|
-        [ clean_question(question_properties[:question]), clean_id(question_properties[:id])]
+        [ clean_question(question_properties["question"]), clean_id(question_properties["id"])]
       end.to_h
     end
 
