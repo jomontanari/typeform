@@ -24,7 +24,11 @@ module TypeForm
       end
 
       def [] key
-        self.send type(key), key
+        begin
+          self.send type(key), key
+        rescue TypeError, NoMethodError
+          ""
+        end
       end
 
       private

@@ -33,6 +33,31 @@ module TypeForm
 
     end
 
+    context 'unrecognised field type' do
+      let(:typeform_answers) do
+        [{
+          "answers" => {
+            "textfield_1" => "Joanne"
+          }
+        }]
+      end
+
+      it 'empty question sends an empty string back' do
+        answer = Responses.new(typeform_answers).first
+        expect(answer[""]).to eq ""
+      end
+
+      it 'unrecognised field type sends an empty string back' do
+        answer = Responses.new(typeform_answers).first
+        expect(answer["notafield_1"]).to eq ""
+      end
+
+      it 'missing underscore sends an empty string back' do
+        answer = Responses.new(typeform_answers).first
+        expect(answer["somethingwrong"]).to eq ""
+      end
+    end
+
     context 'multiple choice field' do
       let(:answer) { Responses.new(typeform_answers).first }
 
