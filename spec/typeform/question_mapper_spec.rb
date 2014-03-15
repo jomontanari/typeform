@@ -32,6 +32,10 @@ module TypeForm
       it 'ignores trailing question marks' do
         expect(question_mapper.find "what is your company").to eq "textfield2"
       end
+
+      it 'returns an empty string when the question does not exist' do 
+        expect(question_mapper.find "what is your address").to eq ""
+      end
       
     end
 

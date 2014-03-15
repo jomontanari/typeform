@@ -11,7 +11,7 @@ module TypeForm
     end
 
     def find question_text
-      @questions[clean_question(question_text)]
+      @questions.fetch(clean_question(question_text), "")
     end
 
     private
