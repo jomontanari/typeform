@@ -183,6 +183,24 @@ module TypeForm
         end
       end
 
+      context 'with different case between template and answers' do
+        let(:object_template) do
+          {
+            weather: {
+              rain: "what weather do you like_RAIN",
+              sun: "what weather do you like_SUNSHINE",
+              cloud: "what weather do you like_CLOUD",
+            }
+          }
+        end
+
+        it 'is case insensitive' do
+          expect(mapped_results.first[:weather][:sun]).to be true
+          expect(mapped_results.first[:weather][:rain]).to be true
+        end
+
+      end
+
 
     end 
 

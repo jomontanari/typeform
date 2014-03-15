@@ -38,7 +38,7 @@ module TypeForm
       if choice.nil?
         answers[field]
       else
-        answers[field].include? choice
+        answers[field].map(&:upcase).include? choice.upcase
       end
     end
   end
