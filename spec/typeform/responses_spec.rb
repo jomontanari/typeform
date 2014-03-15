@@ -26,6 +26,11 @@ module TypeForm
         expect(answer["textfield_1"]).to eq "Joanne"
       end
 
+      it 'sends an empty string if the answer does not exist' do
+        answer = Responses.new(typeform_answers).first
+        expect(answer["textfield_2"]).to eq ""
+      end
+
     end
 
     context 'multiple choice field' do
@@ -43,6 +48,10 @@ module TypeForm
         it 'retrieves the response as text' do
           expect(answer["list_1"]).to eq "Sunshine"
         end
+ 
+        it 'sends back an empty array if the answer does not exist' do
+          expect(answer["list_2"]).to eq []
+        end
 
       end
 
@@ -58,6 +67,10 @@ module TypeForm
 
         it 'retrieves the response as text' do
           expect(answer["list_1"]).to eq "Rain"
+        end
+
+        it 'sends back an empty array if the answer does not exist' do
+          expect(answer["list_2"]).to eq []
         end
       end
 
@@ -75,6 +88,10 @@ module TypeForm
         it 'retrieves the chosen responses in an array' do
           expect(answer["list_1"]).to eq ["Sunshine", "Rain"]
         end
+
+        it 'sends back an empty array if the answer does not exist' do
+          expect(answer["list_2"]).to eq []
+        end
       end
 
       context 'with multiple answers or other option' do
@@ -91,6 +108,10 @@ module TypeForm
 
         it 'retrieves the chosen responses including the other choice' do
           expect(answer["list_1"]).to eq ["Rain", "Cloudy"]
+        end
+
+        it 'sends back an empty array if the answer does not exist' do
+          expect(answer["list_2"]).to eq []
         end
       end
 

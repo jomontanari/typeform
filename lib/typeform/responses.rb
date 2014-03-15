@@ -30,7 +30,7 @@ module TypeForm
       private
 
       def textfield key
-        @answers[key]
+        @answers.fetch(key, "")
       end
 
       def list key
